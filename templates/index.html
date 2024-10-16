@@ -1,0 +1,24 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dyslexia AI Platform</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    
+</head>
+<body style="background-image: url('/static/img/background.jpeg');">
+  <div class="container">
+    <div class="content">
+      <h1>Welcome to Dyslexia AI Learning</h1>
+      <p>Helping dyslexic individuals learn with personalized AI support</p>
+      <div class="buttons">
+        <a href="{{ url_for('signin') }}">Sign In</a>
+    <a href="{{ url_for('signup') }}">Sign Up</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
