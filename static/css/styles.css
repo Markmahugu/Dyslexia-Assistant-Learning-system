@@ -1,0 +1,123 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 0;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(6, 50px);
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.grid-item {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    background-color: #f0f0f0;
+    font-size: 24px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.grid-item {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 20px;
+    text-align: center;
+    font-size: 24px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.grid-item:hover {
+    background-color: #e0e0e0;
+}
+
+/* Style for the Next Test button */
+#next-test-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#next-test-btn:hover {
+    background-color: #0056b3;
+}
+
+/* General Body Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    padding: 20px;
+}
+
+/* Heading Styles */
+h1 {
+    color: #0056b3;
+    text-align: center;
+}
+
+/* Button Styles */
+button {
+    background-color: #0056b3; /* Button background color */
+    color: #fff; /* Text color */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px 20px; /* Padding */
+    font-size: 16px; /* Font size */
+    cursor: pointer; /* Pointer on hover */
+    transition: background-color 0.3s; /* Smooth transition */
+    display: block; /* Center alignment */
+    margin: 20px auto; /* Center button with margin */
+}
+
+/* Button Hover Effect */
+button:hover {
+    background-color: #003d7a; /* Darker shade on hover */
+}
+
+/* Letter Sequence Styles */
+#letter-sequence {
+    text-align: center; /* Center align */
+    margin: 20px 0; /* Margin above and below */
+    font-size: 28px; /* Increase font size */
+    font-weight: bold; /* Bold font */
+}
+
+/* Answer Section Styles */
+#answer-section {
+    margin-top: 20px; /* Margin above */
+    text-align: center; /* Center align */
+}
+
+/* Result Message Styles */
+#result {
+    margin-top: 20px; /* Margin above */
+    font-size: 20px; /* Font size */
+    text-align: center; /* Center align */
+    color: #28a745; /* Green color for success messages */
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 600px) {
+    button {
+        width: 100%; /* Full width on small screens */
+    }
+}

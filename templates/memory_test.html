@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Test</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <h1>Memory Test</h1>
+    <p>Remember the following sequence:</p>
+    <div id="letter-sequence" style="font-size: 24px; font-weight: bold;"></div>
+    <button id="start-test-btn">Start Test</button>
+
+    <!-- Answer input section (now using buttons for shape selection) -->
+    <div id="answer-section" style="display:none;">
+        <h2>Select the shapes in the correct order:</h2>
+        <div id="shape-options"></div> <!-- Shape buttons will be added here -->
+        <h3>Your selection:</h3>
+        <div id="selected-shapes" style="font-size: 24px; font-weight: bold;"></div> <!-- Displays selected shapes -->
+        <button id="submit-answer-btn">Submit Answer</button>
+    </div>
+
+    <!-- Result display section -->
+    <div id="result" style="display:none;"></div>
+
+    <!-- Button to proceed to the next sequence/test -->
+    <button id="next-test-btn" style="display:none;">Next Sequence</button>
+
+    <script src="{{ url_for('static', filename='js/memory_test.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reading Test</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <h1>Reading Test</h1>
+    <p>Unscramble the following sentence:</p>
+    <div id="scrambled-text">The qciuk brown fox jmups over the alyz dog.</div>
+
+    <div>
+        <textarea id="user-answer" placeholder="Enter the correct sentence"></textarea>
+        <button id="submit-answer">Submit</button>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/reading_test.js') }}"></script>
+</body>
+</html>
