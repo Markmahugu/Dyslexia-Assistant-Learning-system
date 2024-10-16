@@ -26,7 +26,7 @@ def memory_test():
 def reading_test():
     return render_template('reading_test.html')
 
-# Endpoint to save individual test results and overall performance
+# Endpoint to save individual test results
 @app.route('/save_result', methods=['POST'])
 def save_result():
     data = request.get_json()
@@ -46,27 +46,62 @@ def save_result():
     conn = get_db_connection()
     cursor = conn.cursor()
 
-    # Insert into appropriate table based on test type
-    table_name = None
+    # Determine which table to insert the result into based on test_type
     if test_type == 'Attention':
-        table_name = 'attention_test_results'
-    elif test_type == 'Memory Test':
-        table_name = 'memory_test_results'
-    elif test_type == 'Reading Test':
-        table_name = 'reading_test_results'
+        query = '''INSERT INTO attention_test_results 
+                    (test_type, user_answer, correct_answer, result, time_taken, correct_attempts, incorrect_attempts, timestamp) 
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s)'''
+    elif test_type == 'Memory':
+        query = '''INSERT INTO memory_test_results 
+                    (test_type, user_answer, correct_answer, result, time_taken, correct_attempts, incorrect_attempts, timestamp) 
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s)'''
+    elif test_type == 'Reading':
+        query = '''INSERT INTO reading_test_results 
+                    (test_type, user_answer, correct_answer, result, time_taken, correct_attempts, incorrect_attempts, timestamp) 
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s)'''
+    else:
+        return jsonify({"message": "Invalid test type"}), 400
 
-    if table_name:
-        # Insert individual test result into the database
-        cursor.execute(f'''INSERT INTO {table_name} 
-                           (test_type, user_answer, correct_answer, result, time_taken, correct_attempts, incorrect_attempts, timestamp) 
-                           VALUES (%s, %s, %s, %s, %s, %s, %s, %s)''', 
-                       (test_type, user_answer, correct_answer, result, time_taken, correct_attempts, incorrect_attempts, timestamp))
-        conn.commit()
-
+    # Insert the data into the appropriate table
+    cursor.execute(query, 
+                   (test_type, user_answer, correct_answer, result, time_taken, correct_attempts, incorrect_attempts, timestamp))
+    conn.commit()
     cursor.close()
     conn.close()
 
     return jsonify({"message": "Result saved successfully!"})
+
+# Endpoint to calculate scores and performance
+@app.route('/calculate_performance', methods=['GET'])
+def calculate_performance():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    # Fetch the results from the memory test results table
+    cursor.execute('SELECT correct_attempts, incorrect_attempts FROM memory_test_results')
+    results = cursor.fetchall()
+
+    total_correct = sum(result[0] for result in results)
+    total_incorrect = sum(result[1] for result in results)
+    total_tests = len(results)
+
+    # Calculate scores
+    if total_tests > 0:
+        score = (total_correct / total_tests) * 100  # Score as a percentage
+        memory_capacity = total_correct / total_tests * 100  # Assuming 100% capacity is all correct
+    else:
+        score = 0
+        memory_capacity = 0
+
+    cursor.close()
+    conn.close()
+
+    return jsonify({
+        "score": score,
+        "total_correct": total_correct,
+        "total_incorrect": total_incorrect,
+        "memory_capacity": memory_capacity
+    })
 
 if __name__ == '__main__':
     app.run(debug=True)

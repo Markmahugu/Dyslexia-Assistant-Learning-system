@@ -7,13 +7,23 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <h1>Reading Test</h1>
-    <p>Unscramble the following sentence:</p>
-    <div id="scrambled-text">The qciuk brown fox jmups over the alyz dog.</div>
+    <div class="container">
+        <h1>Reading Test</h1>
+        <p>Unscramble the following sentence:</p>
+        <div id="scrambled-text" class="scrambled-text">The qciuk brown fox jmups over the alyz dog.</div>
 
-    <div>
-        <textarea id="user-answer" placeholder="Enter the correct sentence"></textarea>
-        <button id="submit-answer">Submit</button>
+        <div class="answer-section">
+            <textarea id="user-answer" placeholder="Enter the correct sentence"></textarea>
+            <button id="submit-answer">Submit</button>
+        </div>
+
+        <div id="feedback" class="feedback"></div>
+
+        <div id="next-test" class="next-test" style="display: none;">
+            <h2>Next Test: Word Recognition</h2>
+            <p>Identify the following words:</p>
+            <button id="start-word-recognition">Start Word Recognition Test</button>
+        </div>
     </div>
 
     <script src="{{ url_for('static', filename='js/reading_test.js') }}"></script>

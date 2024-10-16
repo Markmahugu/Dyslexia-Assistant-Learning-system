@@ -7,12 +7,14 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <h1>Attention Test - Find the Target Letter</h1>
-    <p>Find the target letter: <strong id="target-letter">A</strong></p>
-    <div class="grid" id="letter-grid"></div>
-    <p id="score-display">Score: 0 / 0</p>
-    
-    <button id="next-test-btn" onclick="window.location.href='/memory_test';">Next Test</button>
+    <div class="container">
+        <h1>Attention Test - Find the Target Letter</h1>
+        <p>Find the target letter: <strong id="target-letter">A</strong></p>
+        <div class="grid" id="letter-grid"></div>
+        <p id="score-display">Score: 0 / 0</p>
+        
+        <button id="next-test-btn" style="display:none;" onclick="window.location.href='/memory_test';">Proceed to Memory Test</button>
+    </div>
 
     <script src="{{ url_for('static', filename='js/attention_test.js') }}"></script>
 </body>
