@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 16, 2024 at 10:57 PM
+-- Generation Time: Oct 17, 2024 at 01:55 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -44,24 +44,16 @@ CREATE TABLE `attention_test_results` (
 --
 
 INSERT INTO `attention_test_results` (`id`, `test_type`, `user_answer`, `correct_answer`, `result`, `time_taken`, `correct_attempts`, `incorrect_attempts`, `timestamp`) VALUES
-(106, 'Attention', 'O', 'I', 'Incorrect', 986, 0, 0, '2024-10-16 18:49:35'),
-(107, 'Attention', 'D', 'D', 'Correct', 4020, 1, 0, '2024-10-16 18:49:40'),
-(108, 'Attention', 'X', 'X', 'Correct', 1010, 2, 0, '2024-10-16 18:49:42'),
-(109, 'Attention', 'R', 'R', 'Correct', 2316, 3, 0, '2024-10-16 18:49:45'),
-(110, 'Attention', 'P', 'P', 'Correct', 1950, 4, 0, '2024-10-16 18:49:48'),
-(111, 'Attention', NULL, NULL, 'Correct', 15.35, 4, 1, '2024-10-16 18:49:52'),
-(112, 'Attention', 'T', 'T', 'Correct', 3747, 1, -1, '2024-10-16 19:32:31'),
-(113, 'Attention', 'R', 'R', 'Correct', 1988, 2, -1, '2024-10-16 19:32:34'),
-(114, 'Attention', 'S', 'S', 'Correct', 1306, 3, -1, '2024-10-16 19:32:36'),
-(115, 'Attention', 'V', 'V', 'Correct', 1056, 4, -1, '2024-10-16 19:32:38'),
-(116, 'Attention', 'H', 'H', 'Correct', 2764, 5, -1, '2024-10-16 19:32:42'),
-(117, 'Attention', NULL, NULL, 'Correct', 15.973, 5, 0, '2024-10-16 19:32:48'),
-(118, 'Attention', 'L', 'L', 'Correct', 1908, 1, -1, '2024-10-16 20:44:08'),
-(119, 'Attention', 'E', 'E', 'Correct', 1606, 2, -1, '2024-10-16 20:44:11'),
-(120, 'Attention', 'Q', 'Q', 'Correct', 1216, 3, -1, '2024-10-16 20:44:13'),
-(121, 'Attention', 'L', 'L', 'Correct', 943, 4, -1, '2024-10-16 20:44:15'),
-(122, 'Attention', 'O', 'O', 'Correct', 2068, 5, -1, '2024-10-16 20:44:18'),
-(123, 'Attention', NULL, NULL, 'Correct', 12.815, 5, 0, '2024-10-16 20:44:28');
+(124, 'Attention', 'L', 'K', 'Incorrect', 2645, 0, 0, '2024-10-16 23:10:03'),
+(125, 'Attention', 'P', 'N', 'Incorrect', 2738, 0, 1, '2024-10-16 23:10:06'),
+(126, 'Attention', 'P', 'C', 'Incorrect', 259, 0, 2, '2024-10-16 23:10:08'),
+(127, 'Attention', 'Z', 'C', 'Incorrect', 1061, 0, 3, '2024-10-16 23:10:08'),
+(128, 'Attention', 'T', 'A', 'Incorrect', 726, 0, 4, '2024-10-16 23:10:10'),
+(129, 'Attention', 'Z', 'Z', 'Correct', 2761, 1, -1, '2024-10-16 23:13:25'),
+(130, 'Attention', 'Y', 'Y', 'Correct', 1479, 2, -1, '2024-10-16 23:13:27'),
+(131, 'Attention', 'L', 'L', 'Correct', 1751, 3, -1, '2024-10-16 23:13:30'),
+(132, 'Attention', 'H', 'H', 'Correct', 7547, 4, -1, '2024-10-16 23:13:39'),
+(133, 'Attention', 'U', 'U', 'Correct', 1364, 5, -1, '2024-10-16 23:13:41');
 
 -- --------------------------------------------------------
 
@@ -86,14 +78,8 @@ CREATE TABLE `memory_test_results` (
 --
 
 INSERT INTO `memory_test_results` (`id`, `test_type`, `user_answer`, `correct_answer`, `result`, `time_taken`, `correct_attempts`, `incorrect_attempts`, `timestamp`) VALUES
-(13, 'Memory', '🟡🟢🔴🔵🟣', '🟡🟢🟠🔵🔴', 'Incorrect', 10.778, 0, 1, '2024-10-16 19:55:40'),
-(14, 'Memory', '', 'ZCMBU', 'Incorrect', 13.053, 1, 1, '2024-10-16 19:55:55'),
-(15, 'Memory', '', '77024', 'Incorrect', 8.473, 2, 1, '2024-10-16 19:56:06'),
-(16, 'Memory', '', 'Green, Red, Orange, Blue, Yellow', 'Incorrect', 7.885, 2, 2, '2024-10-16 19:56:16'),
-(17, 'Memory', '🟡🟢🟣🔵🔴', '🟡🟢🟣🔵🟠', 'Incorrect', 20.194, 0, 1, '2024-10-16 20:45:13'),
-(18, 'Memory', '', 'CLVJE', 'Incorrect', 8.459, 1, 1, '2024-10-16 20:45:24'),
-(19, 'Memory', '', '74093', 'Incorrect', 7.293, 2, 1, '2024-10-16 20:45:33'),
-(20, 'Memory', '', 'Blue, Green, Yellow, Orange, Red', 'Incorrect', 20.553, 2, 2, '2024-10-16 20:45:56');
+(21, 'Memory', '🟡🔵🟠🟠', '🟠🟡🔵🟢🔴', 'Incorrect', 7.225, 0, 1, '2024-10-16 23:10:28'),
+(22, 'Memory', '🟢🟡🟠🟢🟠', '🟣🟢🔵🟠🟡', 'Incorrect', 7.754, 0, 1, '2024-10-16 23:13:55');
 
 -- --------------------------------------------------------
 
@@ -118,19 +104,54 @@ CREATE TABLE `reading_test_results` (
 --
 
 INSERT INTO `reading_test_results` (`id`, `test_type`, `user_answer`, `correct_answer`, `result`, `time_taken`, `correct_attempts`, `incorrect_attempts`, `timestamp`) VALUES
-(11, 'Reading', 'The quick brown fox jumps over the lazy dog.', 'The quick brown fox jumps over the lazy dog.', 'Correct', 22, 1, 0, '2024-10-16 20:35:41'),
-(12, 'Reading', 'The quick brown fox jumps over the lazy dog.', 'The quick brown fox jumps over the lazy dog.', 'Correct', 2, 1, 0, '2024-10-16 20:36:20'),
-(13, 'Reading', 'The quick brown fox jumps over the lazy dog.', 'The quick brown fox jumps over the lazy dog.', 'Correct', 17, 1, 0, '2024-10-16 20:39:26'),
-(14, 'Reading', 'The quick brown fox jumps over the lazy dog.', 'The quick brown fox jumps over the lazy dog.', 'Correct', 24, 2, 0, '2024-10-16 20:39:33'),
-(15, 'Reading', 'The quick brown fox jumps over the lazy dog.', 'The quick brown fox jumps over the lazy dog.', 'Correct', 15, 1, 0, '2024-10-16 20:39:54'),
-(16, 'Reading', 'The quick brown fox jumps over the lazy dog.', 'The quick brown fox jumps over the lazy dog.', 'Correct', 19, 2, 0, '2024-10-16 20:39:57'),
-(17, 'Reading', 'The quick brown fox jumps over the lazy dog.', 'The quick brown fox jumps over the lazy dog.', 'Correct', 13, 1, 0, '2024-10-16 20:42:01'),
-(18, 'Reading', 'The quick brown fox jumps over the lazy dog.', 'The quick brown fox jumps over the lazy dog.', 'Correct', 29, 1, 0, '2024-10-16 20:46:40'),
-(19, 'Reading', 'The quick brown fox jumps over the lazy dog.', 'The quick brown fox jumps over the lazy dog.', 'Correct', 13, 1, 0, '2024-10-16 20:49:10'),
-(20, 'Reading', 'The quick brown fox jumps over the lazy dog.', 'The quick brown fox jumps over the lazy dog.', 'Correct', 16, 1, 0, '2024-10-16 20:51:09'),
-(21, 'Reading', 'The quick brown fox jumps over the lazy dog.', 'The quick brown fox jumps over the lazy dog.', 'Correct', 2, 1, 0, '2024-10-16 20:52:10'),
-(22, 'Reading', 'The quick brown fox jumps over the lazy dog.', 'The quick brown fox jumps over the lazy dog.', 'Correct', 3, 1, 0, '2024-10-16 20:56:03'),
-(23, 'Reading', 'The quick brown fox jumps over the lazy dog.', 'The quick brown fox jumps over the lazy dog.', 'Correct', 2, 1, 0, '2024-10-16 20:57:00');
+(24, 'Reading', 'The quick brown fox jumps over the alyz dog.', 'The quick brown fox jumps over the lazy dog.', 'Incorrect', 10, 0, 1, '2024-10-16 23:11:02'),
+(25, 'Reading', 'The quick brown fox jumps over the lazy dog.', 'The quick brown fox jumps over the lazy dog.', 'Correct', 13, 1, 1, '2024-10-16 23:11:05'),
+(26, 'Reading', 'The qciuk brown fox jmups over the alyz dog.', 'The quick brown fox jumps over the lazy dog.', 'Incorrect', 11, 0, 1, '2024-10-16 23:13:07'),
+(27, 'Reading', 'The quick brown fox jumps over the lazy dog.', 'The quick brown fox jumps over the lazy dog.', 'Correct', 17, 1, 1, '2024-10-16 23:13:13'),
+(28, 'Reading', 'The qciuk brown fox jmups over the alyz dog.', 'The quick brown fox jumps over the lazy dog.', 'Incorrect', 7, 0, 1, '2024-10-16 23:14:25'),
+(29, 'Reading', 'The quick brown fox jumps over the lazy dog.', 'The quick brown fox jumps over the lazy dog.', 'Correct', 16, 1, 1, '2024-10-16 23:14:34');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `password`, `email`) VALUES
+(1, 'example_user', 'secure_password', 'user@example.com');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_personality`
+--
+
+CREATE TABLE `user_personality` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `personality` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user_personality`
+--
+
+INSERT INTO `user_personality` (`id`, `user_id`, `personality`, `created_at`) VALUES
+(1, 1, 'Introvert', '2024-10-16 23:08:14'),
+(2, 1, 'Creative and Visual Learner', '2024-10-16 23:08:48'),
+(3, 1, 'Analytical and Logical Learner', '2024-10-16 23:09:16');
 
 --
 -- Indexes for dumped tables
@@ -155,6 +176,20 @@ ALTER TABLE `reading_test_results`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Indexes for table `user_personality`
+--
+ALTER TABLE `user_personality`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -162,19 +197,41 @@ ALTER TABLE `reading_test_results`
 -- AUTO_INCREMENT for table `attention_test_results`
 --
 ALTER TABLE `attention_test_results`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=134;
 
 --
 -- AUTO_INCREMENT for table `memory_test_results`
 --
 ALTER TABLE `memory_test_results`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `reading_test_results`
 --
 ALTER TABLE `reading_test_results`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `user_personality`
+--
+ALTER TABLE `user_personality`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `user_personality`
+--
+ALTER TABLE `user_personality`
+  ADD CONSTRAINT `user_personality_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
