@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprehension Assessment for People with Dyslexia</title>
+    <style>
+        /* General Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.container {
+    max-width: 900px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 30px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    transition: transform 0.3s;
+}
+
+.container:hover {
+    transform: translateY(-5px); /* A subtle hover effect */
+}
+
+h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 30px;
+}
+
+h2 {
+    color: #2980b9;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+p {
+    color: #555;
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+.answer-area textarea {
+    width: 100%;
+    padding: 15px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+    resize: vertical;
+}
+
+.answer-area textarea:focus {
+    border-color: #2980b9;
+    background-color: #eef7ff;
+    outline: none;
+    transition: border-color 0.3s ease-in-out;
+}
+
+.explanation-box {
+    background-color: #ecf5ff;
+    border-left: 6px solid #2980b9;
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 30px;
+}
+
+.multimedia {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.multimedia img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.multimedia .next-btn {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #2980b9;
+    color: white;
+    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.multimedia .next-btn:hover {
+    background-color: #1b69a1;
+}
+
+.submit-btn {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background-color: #27ae60;
+    color: white;
+    text-align: center;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+    background-color: #219150;
+}
+
+/* Flash Messages */
+.flash-message {
+    background-color: #27ae60;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-align: center;
+    margin-top: 20px;
+    display: none; /* Hidden by default, will be shown dynamically */
+}
+
+/* Form Layout */
+form .method {
+    margin-bottom: 40px;
+}
+
+label {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        margin: 20px;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .multimedia .next-btn {
+        font-size: 0.9rem;
+    }
+
+    .submit-btn {
+        font-size: 1rem;
+        padding: 12px;
+    }
+}
+
+    </style>
+</head>
+<body>
+
+    <!-- Flash messages here -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class="flashes">
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    <div class="container">
+        <h1>Comprehension Assessment for People with Dyslexia</h1>
+        
+        <form action="{{ url_for('submit') }}" method="POST">
+            <div class="method">
+                <h2>1. Interest-Based Reading and Explanation</h2>
+                <div class="explanation-box">
+                    <p>Read the following passage carefully, and then answer the questions based on what you understood:</p>
+                    <p><strong>Text Passage:</strong></p>
+                    <p>"In the animal kingdom, the cheetah is known for being the fastest land animal. It can reach speeds of up to 70 miles per hour in short bursts, mainly when hunting prey. Their long legs, flexible spine, and large nasal passages are essential in helping them achieve such incredible speeds."</p>
+                    <p>After reading, provide your explanation of what you understood from the passage below:</p>
+                    <div class="answer-area">
+                        <textarea id="answer1" name="answer1" rows="4" cols="50" placeholder="Type your answer here..."></textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="method">
+                <h2>2. Image-Based Comprehension Testing</h2>
+                <p>Look at the following image and describe what it shows:</p>
+                <div class="multimedia">
+                    <img id="displayedImage" src="{{ url_for('static', filename='images/download (4).jpeg') }}" alt="car">
+                    <button type="button" class="next-btn" onclick="nextImage()">Next</button>
+                </div>
+            </div>
+            
+            <div class="method">
+                <h2>3. Submit Your Responses</h2>
+                <label for="answer2">What does the above image show?</label><br>
+                <div class="answer-area">
+                    <textarea id="answer2" name="answer2" rows="4" cols="50" placeholder="Type your answer here..."></textarea>
+                </div><br>
+                
+                <button type="submit" class="submit-btn">Submit Answers</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const images = [
+            '{{ url_for("static", filename="images/download (4).jpeg") }}',
+            '{{ url_for("static", filename="images/download (5).jpeg") }}',
+            '{{ url_for("static", filename="images/download (6).jpeg") }}'
+        ];
+
+        let currentImageIndex = 0;
+
+        function nextImage() {
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            document.getElementById('displayedImage').src = images[currentImageIndex];
+        }
+    </script>
+</body>
+</html>

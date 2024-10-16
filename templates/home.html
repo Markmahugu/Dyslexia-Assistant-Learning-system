@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dyslexia Assistance</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            display: flex; /* Enable flexbox layout */
+            overflow: hidden; /* Prevent scrollbars when sidebar is closed */
+        }
+        body.sidebar-collapsed {
+            overflow: auto; /* Allow scrolling when sidebar is collapsed */
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #0073e6;
+            color: white;
+            padding: 20px;
+            height: 100vh; /* Full height of the viewport */
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            position: fixed; /* Fixed position for sidebar */
+            left: 0; /* Align to left */
+            top: 0; /* Align to top */
+            transition: transform 0.3s ease; /* Smooth transition for the sidebar */
+            transform: translateX(0); /* Default position */
+        }
+        .sidebar.collapsed {
+            transform: translateX(-100%); /* Move sidebar out of view */
+        }
+        .sidebar h2 {
+            color: #fff;
+        }
+        .sidebar p {
+            margin: 10px 0;
+        }
+        .main-content {
+            flex-grow: 1; /* Take the remaining space */
+            padding: 20px;
+            margin-left: 250px; /* Space for the sidebar */
+            transition: margin-left 0.3s ease; /* Smooth transition for the main content */
+        }
+        .main-content.collapsed {
+            margin-left: 0; /* Remove margin when sidebar is collapsed */
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .chat-area {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            background-color: #fff;
+            height: 400px; /* Fixed height for scrolling */
+            overflow-y: auto; /* Scroll if overflow */
+            margin-bottom: 20px;
+        }
+        .chat-message {
+            margin: 10px 0;
+        }
+        .user-message {
+            text-align: right;
+            color: #0073e6;
+        }
+        .ai-message {
+            text-align: left;
+            color: #333;
+        }
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: none; /* Prevent resizing */
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #0073e6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .toggle-button {
+            position: absolute;
+            top: 10px;
+            right: -30px; /* Position the button outside the sidebar */
+            background-color: transparent; /* Transparent background */
+            border: none; /* No border */
+            cursor: pointer;
+            color: white; /* White icon color for contrast */
+            font-size: 20px; /* Size of the icon */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar" id="sidebar">
+        <button class="toggle-button" id="toggleButton"><i class="fas fa-chevron-left" id="toggleIcon"></i></button>
+        <h2>User Dashboard</h2>
+        <p><strong>Name:</strong> John Doe</p>
+        <p><strong>Level of Dyslexia:</strong> Moderate</p>
+        <p><strong>Interests:</strong> Science, Art</p>
+        <p><a href="#" style="color: white;">Logout</a></p>
+    </div>
+
+    <div class="main-content" id="mainContent">
+        <h1>Dyslexia Assistance</h1>
+        
+        <div class="chat-area" id="chatArea"></div>
+
+        <div class="prompt-area">
+            <textarea id="userPrompt" rows="4" placeholder="Type your prompt here..."></textarea>
+            <button id="submitPrompt">Submit Prompt</button>
+        </div>
+    </div>
+
+    <script>
+        // Toggle the sidebar visibility
+        document.getElementById('toggleButton').addEventListener('click', function() {
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('mainContent');
+            const toggleIcon = document.getElementById('toggleIcon');
+            const body = document.body; // Reference to the body element
+
+            sidebar.classList.toggle('collapsed');
+            mainContent.classList.toggle('collapsed');
+
+            // Change the icon based on the sidebar state
+            if (sidebar.classList.contains('collapsed')) {
+                toggleIcon.classList.remove('fa-chevron-left');
+                toggleIcon.classList.add('fa-chevron-right');
+                body.classList.add('sidebar-collapsed'); // Add class when sidebar is collapsed
+            } else {
+                toggleIcon.classList.remove('fa-chevron-right');
+                toggleIcon.classList.add('fa-chevron-left');
+                body.classList.remove('sidebar-collapsed'); // Remove class when sidebar is open
+            }
+        });
+
+        document.getElementById('submitPrompt').addEventListener('click', async function() {
+            const userPrompt = document.getElementById('userPrompt').value;
+            const chatArea = document.getElementById('chatArea');
+
+            // Append the user's message to the chat area
+            chatArea.innerHTML += `<div class="chat-message user-message"><strong>You:</strong> ${userPrompt}</div>`;
+            document.getElementById('userPrompt').value = ''; // Clear the input
+
+            try {
+                const response = await fetch('/api/assist/prompt', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ prompt: userPrompt }),
+                });
+
+                const data = await response.json();
+                if (data.message) {
+                    // Append the AI's response to the chat area
+                    chatArea.innerHTML += `<div class="chat-message ai-message"><strong>AI:</strong> ${data.message}</div>`;
+                } else {
+                    chatArea.innerHTML += `<div class="chat-message ai-message"><strong>AI:</strong> Error: ${data.error}</div>`;
+                }
+
+                // Scroll to the bottom of the chat area
+                chatArea.scrollTop = chatArea.scrollHeight;
+            } catch (error) {
+                chatArea.innerHTML += `<div class="chat-message ai-message"><strong>AI:</strong> Error fetching response. Please try again.</div>`;
+            }
+        });
+    </script>
+</body>
+</html>
