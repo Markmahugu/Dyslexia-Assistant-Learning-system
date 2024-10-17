@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 17, 2024 at 01:55 AM
+-- Generation Time: Oct 17, 2024 at 09:29 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -119,17 +119,20 @@ INSERT INTO `reading_test_results` (`id`, `test_type`, `user_answer`, `correct_a
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `username` varchar(50) NOT NULL,
+  `first_name` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL
+  `email` varchar(255) NOT NULL,
+  `dob` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `email`) VALUES
-(1, 'example_user', 'secure_password', 'user@example.com');
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `password`, `email`, `dob`) VALUES
+(2, 'charity', 'cheruto', '$2b$12$qckeaFmDOxD776yCTV5rFOBUpVBYOnOWNh63kgCK0GBSXJVvvXnBu', '', '2024-02-06'),
+(4, 'mark', 'kiarie', '$2b$12$5bZGmbx/FjrgEE0Pvol8iux3mWyx87vcVMTu.Tu4M0T97lEklUbpm', '', '2024-10-15');
 
 -- --------------------------------------------------------
 
@@ -143,15 +146,6 @@ CREATE TABLE `user_personality` (
   `personality` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `user_personality`
---
-
-INSERT INTO `user_personality` (`id`, `user_id`, `personality`, `created_at`) VALUES
-(1, 1, 'Introvert', '2024-10-16 23:08:14'),
-(2, 1, 'Creative and Visual Learner', '2024-10-16 23:08:48'),
-(3, 1, 'Analytical and Logical Learner', '2024-10-16 23:09:16');
 
 --
 -- Indexes for dumped tables
@@ -179,15 +173,13 @@ ALTER TABLE `reading_test_results`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `email` (`email`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `user_personality`
 --
 ALTER TABLE `user_personality`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -215,13 +207,13 @@ ALTER TABLE `reading_test_results`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user_personality`
 --
 ALTER TABLE `user_personality`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Constraints for dumped tables

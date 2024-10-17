@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for
 import mysql.connector
 import datetime
-import bcrypt  # for password hashing
+import bcrypt
+import csv  # Import csv module for loading data
 
 app = Flask(__name__)
 
@@ -25,13 +26,12 @@ def index():
     return render_template('index.html')
 
 # Route to render the sign-up page
-@app.route('/signup', methods=['GET'])
-def render_signup():
-    return render_template('signup.html')
-
-# Route to handle sign-up form submission (POST request)
-@app.route('/signup', methods=['POST'])
+@app.route('/signup', methods=['GET', 'POST'])
 def signup():
+    if request.method == 'GET':
+        return render_template('signup.html')
+    
+    # Handle form submission
     first_name = request.form['fname']
     last_name = request.form['lname']
     dob = request.form['dob']
@@ -53,7 +53,7 @@ def signup():
         """
         cursor.execute(query, (first_name, last_name, dob, hashed_password))
         conn.commit()
-        return redirect(url_for('render_signin'))  # Redirect to the signin page
+        return redirect(url_for('signin'))  # Redirect to the signin page
     except mysql.connector.Error as err:
         return f"An error occurred: {str(err)}", 500  # Improved error handling
     finally:
@@ -61,13 +61,12 @@ def signup():
         conn.close()
 
 # Route to render the sign-in page
-@app.route('/signin', methods=['GET'])
-def render_signin():
-    return render_template('signin.html')
-
-# Sign-in route with user authentication
-@app.route('/signin', methods=['POST'])
+@app.route('/signin', methods=['GET', 'POST'])
 def signin():
+    if request.method == 'GET':
+        return render_template('signin.html')
+    
+    # Handle sign-in form submission
     first_name = request.form.get('first_name')
     password = request.form.get('password')
 
@@ -98,10 +97,10 @@ def signin():
 def selection():
     return render_template('selection.html')  # Render the selection page
 
-# Route to save user personality test results
+# Save personality data
 @app.route('/save_personality', methods=['POST'])
 def save_personality():
-    user_id = request.form.get('user_id')
+    user_id = request.form.get('user_id')  # Ensure this is passed from the client
     personality = request.form.get('personality')
 
     if not user_id or not personality:
@@ -113,6 +112,7 @@ def save_personality():
 
     cursor = conn.cursor()
     try:
+        # Insert personality
         query = "INSERT INTO user_personality (user_id, personality) VALUES (%s, %s)"
         cursor.execute(query, (user_id, personality))
         conn.commit()
@@ -211,7 +211,64 @@ def calculate_performance():
         cursor.close()
         conn.close()
 
-# Run the app
+# Route to handle predictions
+@app.route('/dyslexia_assessment')
+def dyslexia_assessment():
+    return render_template('dyslexia_assessment.html')
+
+@app.route('/get_username/<int:user_id>', methods=['GET'])
+def get_username(user_id):
+    conn = get_db_connection()
+    if not conn:
+        return jsonify({'status': 'error', 'message': 'Database connection error'}), 500
+
+    cursor = conn.cursor(dictionary=True)
+    try:
+        cursor.execute("SELECT first_name FROM users WHERE id = %s", (user_id,))
+        user = cursor.fetchone()
+
+        if user:
+            return jsonify({'status': 'success', 'username': user['first_name']})
+        else:
+            return jsonify({'status': 'error', 'message': 'User not found'}), 404
+    except mysql.connector.Error as err:
+        return jsonify({'status': 'error', 'message': str(err)}), 500
+    finally:
+        cursor.close()
+        conn.close()
+
+@app.route('/dashboard', methods=['GET'])
+def dashboard():
+    # Fetch the first name from the users table
+    conn = get_db_connection()
+    if not conn:
+        return "Database connection error", 500
+
+    cursor = conn.cursor()
+    try:
+        cursor.execute("SELECT first_name FROM users LIMIT 1")  # Adjust the query as needed
+        result = cursor.fetchone()
+        first_name = result[0] if result else "User"
+
+        return render_template('dashboard.html', first_name=first_name)
+    except mysql.connector.Error as err:
+        return f"Database error: {str(err)}", 500
+    finally:
+        cursor.close()
+        conn.close()
+
+# Load data from CSV file
+def load_data(filename):
+    data = []
+    try:
+        with open(filename, newline='') as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                data.append(row)
+    except FileNotFoundError:
+        print(f"File {filename} not found.")
+    return data
+
+# Run the application
 if __name__ == '__main__':
     app.run(debug=True)
-    

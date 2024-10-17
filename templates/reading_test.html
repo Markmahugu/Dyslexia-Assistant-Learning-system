@@ -25,7 +25,16 @@
             <button id="start-word-recognition">Start Word Recognition Test</button>
         </div>
     </div>
-
+    <div class="dyslexia_assessment-button" style="margin-top: 20px;">
+        <button id="go-to-dyslexia_assessment">Finished</button>
+    </div>
+    
+    <script>
+        // Add event listener for the Finished button
+        document.getElementById('go-to-dyslexia_assessment').addEventListener('click', function() {
+            window.location.href = '/dashboard';  // Redirect to the dashboard
+        });
+    </script>
     <script src="{{ url_for('static', filename='js/reading_test.js') }}"></script>
 </body>
 </html>

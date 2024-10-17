@@ -195,13 +195,12 @@ const analogies = [
         // Show confirmation popup
         alert('Your personality has been saved successfully!');
 
-        // Redirect the user to another page, e.g., dashboard.html
-        window.location.href = 'dashboard.html';
-      } else {
-        alert('Error saving personality data: ' + data.message);
-      }
-    })
-    .catch(error => {
+    // Redirect the user to the attention test page served by your web server
+    window.location.href = 'http://127.0.0.1:5000/attention_test';
+  } else {
+    alert('Error saving personality data: ' + data.message);
+  }
+})    .catch(error => {
       console.error('Error:', error);
       alert('There was an error saving the data.');
     });
